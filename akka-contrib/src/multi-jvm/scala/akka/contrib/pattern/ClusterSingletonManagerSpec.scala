@@ -342,7 +342,7 @@ class ClusterSingletonManagerSpec extends MultiNodeSpec(ClusterSingletonManagerS
       runOn(leaveRole) {
         val singleton = system.actorFor("/user/singleton")
         watch(singleton)
-        expectMsgType[Terminated].actor must be(singleton)
+        expectTerminated(singleton)
       }
 
       enterBarrier("after-leave")

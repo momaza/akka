@@ -68,7 +68,7 @@ class LocalActorRefProviderSpec extends AkkaSpec(LocalActorRefProviderSpec.confi
       val child = expectMsgType[ActorRef]
       child.asInstanceOf[LocalActorRef].underlying.props must be theSameInstanceAs Props.empty
       system stop a
-      expectMsgType[Terminated]
+      expectTerminated(a)
       val childProps = child.asInstanceOf[LocalActorRef].underlying.props
       childProps must not be theSameInstanceAs(Props.empty)
       childProps must be theSameInstanceAs ActorCell.terminatedProps
